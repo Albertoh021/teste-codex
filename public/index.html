@@ -6,6 +6,7 @@
     <title>Análise de Custos | Entregas e Coletas</title>
     <link rel="stylesheet" href="/styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
   </head>
   <body>
     <header class="topbar">
@@ -20,6 +21,15 @@
     </header>
 
     <main>
+      <section class="filters card">
+        <h2>Importar planilha</h2>
+        <div class="upload-row">
+          <input id="sheet-upload" type="file" accept=".xlsx,.xls" />
+          <button id="clear-upload" type="button">Voltar para API</button>
+        </div>
+        <p class="hint">Use um arquivo Excel com abas <strong>ENTREGAS</strong> (Data, Entregador, Qtd, Receita, Pagamento) e <strong>COLETAS</strong> (Data, Tipo, Receita, Custo).</p>
+      </section>
+
       <section class="filters card">
         <h2>Filtros</h2>
         <div class="filter-grid">

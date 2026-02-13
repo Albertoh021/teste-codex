@@ -24,6 +24,7 @@ Aplicação web completa para análise financeira de uma empresa de entregas e c
 - Tema claro/escuro.
 - Responsivo para desktop e mobile.
 - Autenticação básica opcional para endpoints `/api`.
+- Upload direto de planilha Excel no navegador (abas `ENTREGAS` e `COLETAS`) para gerar dashboard local sem backend.
 
 ## Estrutura do projeto
 
@@ -116,6 +117,17 @@ node demo-server.js
 ```
 
 O modo demo sobe um servidor HTTP simples com dados de exemplo e endpoints `/api/*` simulados.
+
+
+### Upload de planilha direto no site
+
+1. Rode o sistema (modo demo ou completo).
+2. Na tela, em **Importar planilha**, selecione um arquivo `.xlsx`/`.xls`.
+3. O arquivo deve ter abas:
+   - `ENTREGAS` com colunas: Data, Entregador, Quantidade, Valor recebido, Valor pago
+   - `COLETAS` com colunas: Data, Tipo, Valor recebido, Custo operacional
+4. O dashboard passa a operar em **modo arquivo local** (filtros, cards e gráficos).
+5. Clique em **Voltar para API** para retornar ao modo Google Sheets/backend.
 
 ## Endpoints principais
 
