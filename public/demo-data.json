@@ -1,0 +1,117 @@
+{
+  "metadata": {
+    "updatedAt": "2026-02-13T16:00:00.000Z",
+    "filters": {
+      "granularity": "month",
+      "period": null,
+      "courier": null
+    },
+    "mode": "demo"
+  },
+  "summary": {
+    "totalRevenue": 51230,
+    "totalCourierPayments": 20510,
+    "totalOperationalCost": 8140,
+    "totalCost": 28650,
+    "profit": 22580
+  },
+  "records": [
+    {
+      "type": "entrega",
+      "dateKey": "2026-02-03",
+      "courier": "Carlos",
+      "deliveriesCount": 30,
+      "revenue": 9200,
+      "courierPayment": 3600,
+      "operationalCost": 0,
+      "totalCost": 3600
+    },
+    {
+      "type": "entrega",
+      "dateKey": "2026-02-07",
+      "courier": "Marina",
+      "deliveriesCount": 28,
+      "revenue": 8700,
+      "courierPayment": 3450,
+      "operationalCost": 0,
+      "totalCost": 3450
+    },
+    {
+      "type": "coleta",
+      "dateKey": "2026-02-09",
+      "pickupType": "Programada",
+      "deliveriesCount": 0,
+      "revenue": 3100,
+      "courierPayment": 0,
+      "operationalCost": 510,
+      "totalCost": 510
+    }
+  ],
+  "grouped": {
+    "day": [
+      {
+        "period": "2026-02-03",
+        "totalRevenue": 9200,
+        "totalCourierPayments": 3600,
+        "totalOperationalCost": 0,
+        "totalCost": 3600,
+        "profit": 5600
+      },
+      {
+        "period": "2026-02-07",
+        "totalRevenue": 8700,
+        "totalCourierPayments": 3450,
+        "totalOperationalCost": 0,
+        "totalCost": 3450,
+        "profit": 5250
+      },
+      {
+        "period": "2026-02-09",
+        "totalRevenue": 3100,
+        "totalCourierPayments": 0,
+        "totalOperationalCost": 510,
+        "totalCost": 510,
+        "profit": 2590
+      }
+    ],
+    "fortnight": [
+      {
+        "period": "2026-02-Q1",
+        "totalRevenue": 51230,
+        "totalCourierPayments": 20510,
+        "totalOperationalCost": 8140,
+        "totalCost": 28650,
+        "profit": 22580
+      }
+    ],
+    "month": [
+      {
+        "period": "2026-02",
+        "totalRevenue": 51230,
+        "totalCourierPayments": 20510,
+        "totalOperationalCost": 8140,
+        "totalCost": 28650,
+        "profit": 22580
+      }
+    ]
+  },
+  "available": {
+    "couriers": [
+      "Carlos",
+      "Marina"
+    ],
+    "periods": {
+      "day": [
+        "2026-02-03",
+        "2026-02-07",
+        "2026-02-09"
+      ],
+      "fortnight": [
+        "2026-02-Q1"
+      ],
+      "month": [
+        "2026-02"
+      ]
+    }
+  }
+}

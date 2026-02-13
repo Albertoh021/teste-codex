@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Análise de Custos | Entregas e Coletas</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>Análise de Custos Operacionais</h1>
+        <p id="last-update">Atualização: --</p>
+      </div>
+      <div class="toolbar">
+        <button id="refresh-btn">Atualizar agora</button>
+        <button id="theme-btn">Tema escuro</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="filters card">
+        <h2>Importar planilha</h2>
+        <div class="upload-row">
+          <input id="sheet-upload" type="file" accept=".xlsx,.xls" />
+          <button id="clear-upload" type="button">Voltar para API</button>
+        </div>
+        <p class="hint">Use um arquivo Excel com abas <strong>ENTREGAS</strong> (Data, Entregador, Qtd, Receita, Pagamento) e <strong>COLETAS</strong> (Data, Tipo, Receita, Custo).</p>
+      </section>
+
+      <section class="filters card">
+        <h2>Filtros</h2>
+        <div class="filter-grid">
+          <label>
+            Período
+            <select id="granularity">
+              <option value="day">Dia</option>
+              <option value="fortnight">Quinzena</option>
+              <option value="month" selected>Mês</option>
+            </select>
+          </label>
+          <label>
+            Valor do período
+            <select id="period">
+              <option value="">Todos</option>
+            </select>
+          </label>
+          <label>
+            Entregador
+            <select id="courier">
+              <option value="">Todos</option>
+            </select>
+          </label>
+          <button id="apply-filter">Aplicar</button>
+        </div>
+      </section>
+
+      <section class="summary-grid" id="summary-grid"></section>
+
+      <section class="charts card">
+        <div class="card-header">
+          <h2>Receita x Custos x Lucro</h2>
+          <div class="export-actions">
+            <button id="excel-btn">Exportar Excel</button>
+            <button id="pdf-btn">Exportar PDF</button>
+          </div>
+        </div>
+        <canvas id="finance-chart" height="120"></canvas>
+      </section>
+
+      <section class="table-section card">
+        <h2>Dados detalhados</h2>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Tipo</th>
+                <th>Data</th>
+                <th>Entregador / Tipo de Coleta</th>
+                <th>Qtd Entregas</th>
+                <th>Receita</th>
+                <th>Pagamento Entregador</th>
+                <th>Custo Operacional</th>
+                <th>Custo Total</th>
+              </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
