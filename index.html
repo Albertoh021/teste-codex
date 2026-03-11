@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard de Custos Logísticos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.min.js"></script>
+  </head>
+  <body class="bg-slate-100 text-slate-900">
+    <div class="min-h-screen flex">
+      <aside class="w-64 bg-slate-900 text-white p-6 hidden lg:block">
+        <h1 class="text-xl font-bold">LogCost Analytics</h1>
+        <p class="text-slate-300 mt-1 text-sm">Custos logísticos em tempo real</p>
+        <nav class="mt-8 space-y-2 text-sm">
+          <a href="#" class="block bg-slate-700 rounded px-3 py-2">Dashboard</a>
+          <a href="#" class="block hover:bg-slate-800 rounded px-3 py-2">Período</a>
+          <a href="#" class="block hover:bg-slate-800 rounded px-3 py-2">Entregadores</a>
+          <a href="#" class="block hover:bg-slate-800 rounded px-3 py-2">Veículos</a>
+        </nav>
+      </aside>
+
+      <main class="flex-1 p-4 lg:p-8 space-y-6">
+        <header class="bg-white rounded-xl p-4 shadow-sm">
+          <div class="flex flex-col lg:flex-row gap-4 lg:items-end lg:justify-between">
+            <div>
+              <h2 class="text-2xl font-bold">Dashboard de Análise de Custos</h2>
+              <p class="text-slate-600 text-sm">Atualização automática via Google Sheets (CSV).</p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <select id="periodType" class="border rounded px-3 py-2 text-sm">
+                <option value="all">Todo período</option>
+                <option value="day">Dia</option>
+                <option value="week">Semana</option>
+                <option value="fortnight">Quinzena</option>
+                <option value="month">Mês</option>
+                <option value="custom">Intervalo personalizado</option>
+              </select>
+              <input id="startDate" type="date" class="border rounded px-3 py-2 text-sm" />
+              <input id="endDate" type="date" class="border rounded px-3 py-2 text-sm" />
+              <select id="courierFilter" class="border rounded px-3 py-2 text-sm"><option value="all">Todos entregadores</option></select>
+              <select id="vehicleFilter" class="border rounded px-3 py-2 text-sm"><option value="all">Todos veículos</option></select>
+              <select id="contractFilter" class="border rounded px-3 py-2 text-sm"><option value="all">Todos contratos</option></select>
+              <button id="exportExcel" class="bg-emerald-600 text-white rounded px-3 py-2 text-sm">Exportar Excel</button>
+              <button id="exportPdf" class="bg-indigo-600 text-white rounded px-3 py-2 text-sm">Exportar PDF</button>
+            </div>
+          </div>
+          <p id="status" class="text-xs text-slate-500 mt-2">Carregando dados...</p>
+        </header>
+
+        <section id="kpis" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4"></section>
+
+        <section class="grid grid-cols-1 xl:grid-cols-2 gap-4">
+          <div class="bg-white rounded-xl shadow-sm p-4"><canvas id="costByMonthChart"></canvas></div>
+          <div class="bg-white rounded-xl shadow-sm p-4"><canvas id="deliveriesByMonthChart"></canvas></div>
+          <div class="bg-white rounded-xl shadow-sm p-4"><canvas id="profitByContractChart"></canvas></div>
+          <div class="bg-white rounded-xl shadow-sm p-4"><canvas id="costTypeChart"></canvas></div>
+        </section>
+
+        <section class="grid grid-cols-1 xl:grid-cols-2 gap-4">
+          <div class="bg-white rounded-xl shadow-sm p-4">
+            <h3 class="font-semibold mb-3">Ranking de Entregadores</h3>
+            <div id="courierRanking" class="text-sm"></div>
+          </div>
+          <div class="bg-white rounded-xl shadow-sm p-4">
+            <h3 class="font-semibold mb-3">Contratos Mais Lucrativos</h3>
+            <div id="contractRanking" class="text-sm"></div>
+          </div>
+        </section>
+
+        <section class="bg-white rounded-xl shadow-sm p-4 overflow-x-auto">
+          <h3 class="font-semibold mb-3">Tabela Detalhada de Operações</h3>
+          <table class="min-w-full text-sm">
+            <thead>
+              <tr class="text-left border-b">
+                <th class="p-2">Data</th><th class="p-2">Entregador</th><th class="p-2">Tipo</th><th class="p-2">Custo</th><th class="p-2">Contrato</th><th class="p-2">Veículo</th>
+              </tr>
+            </thead>
+            <tbody id="detailTableBody"></tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
